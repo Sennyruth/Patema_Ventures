@@ -1,0 +1,16 @@
+.footer{
+    height: 15vh;
+    background-color: grey;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.social-media{
+    display: flex;
+    gap: 1rem;
+    margin-top: 20px;
+    font-size: 40px;
+    color: white;
+}

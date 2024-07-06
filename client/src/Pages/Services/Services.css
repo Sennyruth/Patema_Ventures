@@ -1,0 +1,44 @@
+.service-hero-text{
+    background-image: url("../../assets/banner4.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+.services{
+    text-align: center;
+}
+.service-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.services-items{
+    width: 20%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid grey;
+    background-color: rgb(211, 204, 204);
+    margin-left: 30px;
+}
+button{
+    background-color: orange;
+    padding: 10px;
+    border-radius: 10px;
+}
+.icon-container{
+    /* width: 100%;
+    height: 2em; */
+    border: 5px solid rgb(7, 7, 7);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    padding: 1em;
+    background-color:orange ;
+    transform: translateY(-50%);
+   
+}

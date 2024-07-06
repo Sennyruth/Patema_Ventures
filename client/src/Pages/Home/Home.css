@@ -1,0 +1,134 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.hero{
+    background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.5)), url("../../assets/banner2.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+.hero-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+
+}
+.hero-title{
+    float:top;
+    color: blue;
+    font-size: 50px;
+    font-weight: 700;
+
+}
+.hero-description{
+    font-size: 20px;
+}
+.cta{
+    background-color:orange;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 50px;
+
+}
+.cta a{
+    text-decoration: none;
+}
+.cta a:hover{
+    transform: scale(95%);
+    color:white; 
+}
+.about-title{
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.containers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-container1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
+    margin-left: 30px
+    
+}
+.about-container1 img{
+    width:70%
+    
+}
+p{
+    word-wrap: break-word;
+}
+.about-container2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 70%;
+    margin-right: 30px  
+}
+.about-container2 img{
+    width:70%
+    }
+    .test-titles{
+        color: black;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+    }
+    .customer-cards{
+        display: flex;
+        flex-wrap: wrap;
+        margin:40px;
+    }
+    .client-container{
+        width: 20%;
+        height: 60vh;
+        border: solid #5a7586;
+        margin-left: 30px;
+        background-color: #5a7586;
+        border-radius: 10px;
+        box-shadow: 3px 8px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 8px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 8px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+    .stars{
+        color: orange;
+        display: flex;
+        justify-content: center;
+    }
+    .quotes{
+        color: orange;
+        text-align: center;
+        font-size: 30px;
+    }
+    .client-container img{
+        width:30%;
+        display: block;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+    .client-card{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }

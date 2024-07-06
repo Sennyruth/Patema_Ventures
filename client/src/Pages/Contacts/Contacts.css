@@ -1,0 +1,104 @@
+.contact-hero{
+    background-image: url("../../assets/contact.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+.contact-hero-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:rgb(255, 142, 127);
+    font-size: 2rem;
+
+}
+.maintitle{
+    font-size: 3rem;
+    color: orangered;
+
+
+}
+.contact-container-text{
+    text-align: center;
+    font-size: 2rem;
+}
+.contact-container-visit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: solid grey;
+    width: 30%;
+    height: 200px;
+    
+}
+.contact-cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+
+}
+.contact-icons{
+    font-size: 40px;
+    color: orangered;
+    text-align: center;
+}
+.cont-text{
+    font-size: 1rem;
+    color: orangered;
+}
+.map{
+    
+    margin-left: 30px;
+
+}
+label{
+    font-size: 2rem;
+    color: orangered;
+
+}
+input{
+    padding: 10px;
+    width: 30rem;
+    border-radius: 5px;
+}
+.form-btn{
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    background-color: orangered;
+   color: white;
+   width: 10rem;
+   font-size: 20px;
+}
+.select{
+    padding: 10px;
+    width:30rem;
+    border-radius: 5px;
+}
+.newsletter-title{
+    font-size: 2rem;
+    text-align: center;
+}
+.form-containers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 2rem; */
+    border: solid grey;
+    width: 35rem;
+    /* height: 450px; */
+    background-color: gray;
+    border-radius: 10px;
+}
+.location-form{
+    display: flex;
+    gap: 2rem;
+    margin-left: 60px;
+}
+/* .newsletter-form-container{
+    margin-left: 10px;
+} */
