@@ -2,8 +2,11 @@
 import {useFormik} from "formik"
 import * as Yup from "yup"
 import { Link } from "react-router-dom"
+import { useState } from "react";
+const apiUrl=import.meta.env.VITE_API_URL_BASE;
 
 function Signin() {
+  const [error, setError] = useState(false);
   const validationschema = Yup.object ({
     firstname:Yup.string().required("firstname is required")
     .min(4,"Firstname should not be less than 4 characters")
@@ -34,8 +37,28 @@ function Signin() {
       password: "",
       confirmpassword: ""
       },
-      onSubmit: (formState) => {
-        console.log(formState)
+      onSubmit: async (formState) => {
+        try {
+          const response = await fetch(`${apiUrl}/api/user/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formState),
+          });
+          // console.log(response);
+          // const response = await axios.post(`${apiUrl}/api/user/register`,formValues)
+          const data = await response.json();
+          console.log(data);
+          // if (data.success === true) {
+          //   setError(false);
+          //   navigate("/sign in");
+          // } else {
+            // setError(data.message);
+          
+        } catch (error) {
+          setError(error.message);
+        }
         },
         validationSchema: validationschema
   })
@@ -89,7 +112,9 @@ function Signin() {
 
          
         </div>
+        <p className="eror">{error && error}</p>
       </form>
+
     </div>
   )
 }

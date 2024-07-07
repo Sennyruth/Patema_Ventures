@@ -1,9 +1,16 @@
 import "./Sign.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { apiUrl } from "../../../utils/config.js";
+// import axios from "axios";
 
+// const apiUrl = import.meta.env.VITE_API_URL_BASE;
 function Signup() {
+  // console.log(apiUrl);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const validationschema = Yup.object({
     firstname: Yup.string()
       .required("firstname is required")
@@ -40,10 +47,30 @@ function Signup() {
       lastname: "",
       email: "",
       password: "",
-      confirmpassword: ""
+      confirmpassword: "",
     },
-    onSubmit: (formState) => {
-      console.log(formState);
+    onSubmit: async (formValues) => {
+      try {
+        const response = await fetch(`${apiUrl}/api/user/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+        });
+        console.log(response);
+        // const response = await axios.post(`${apiUrl}/api/user/register`,formValues)
+        const data = await response.json();
+        // console.log(data);
+        if (data.success === true) {
+          setError(false);
+          navigate("/sign in");
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        setError(error.message);
+      }
     },
 
     validationSchema: validationschema,
@@ -150,6 +177,7 @@ function Signup() {
             Already have an account? <Link to="/sign in">Sign In</Link>
           </p>
         </div>
+        <p className="eror">{error && error}</p>
       </form>
     </div>
   );
