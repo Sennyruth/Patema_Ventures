@@ -13,12 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id String @id @default(uuid())
+model User {
+  id        String     @id @default(uuid())
   firstname String
-  lastname String
-  email String 
-  password String
+  lastname  String
+  email     String
+  password  String
+  Bookings  Bookings[]
+
   @@unique([email])
   @@map("users_table")
+}
+
+model Bookings {
+  id       String @id @default(uuid())
+  date     String
+  location String
+  number   Int
+  service  String
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+
+  @@map("bookings_table")
 }

@@ -4,7 +4,12 @@ import { MdEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Contacts.css";
+import { useState } from "react";
+import { apiUrl } from "../../utils/config.js";
+
 function Contacts() {
+  const [error, setError] = useState(false);
+
   const validationschema = Yup.object({
     serviceDate: Yup.date().required("Date is required"),
 
@@ -13,16 +18,32 @@ function Contacts() {
       .min(3, "location should not be less than 3 characters")
       .max(10, "location should not be more than 10 characters"),
 
+    number: Yup.number().required("Phone Number is required"),
+
     service: Yup.string().required("service required"),
   });
   const formik = useFormik({
     initialValues: {
       serviceDate: "",
       location: "",
+      number: "",
       service: "",
     },
-    onSubmit: (formState) => {
-      console.log(formState);
+    onSubmit: async (formState) => {
+      try {
+        setError(false);
+        const response = await fetch(`${apiUrl}/api/user/booking`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formState),
+        });
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        setError(error.message);
+      }
     },
     validationSchema: validationschema,
   });
@@ -94,6 +115,7 @@ function Contacts() {
         <div className="form-containers">
           <h2 className="newsletter-title">Book a Service</h2>
           <form onSubmit={formik.handleSubmit}>
+            <p className="eror">{error && error}</p>
             <div className="firstname">
               <label htmlFor="serviceDate">Date of Service</label>
               <br />
@@ -116,7 +138,7 @@ function Contacts() {
               <br />
               <input
                 type="text"
-                id="lname"
+                id="location"
                 placeholder="Your location"
                 name="location"
                 value={formik.values.location}
@@ -126,6 +148,23 @@ function Contacts() {
               <br />
               {formik.errors.location && formik.touched.location ? (
                 <div className="error">{formik.errors.location}</div>
+              ) : null}
+            </div>
+            <div className="location">
+              <label htmlFor="number">Phone Number</label>
+              <br />
+              <input
+                type="number"
+                id="number"
+                placeholder="Your Phone Number"
+                name="number"
+                value={formik.values.number}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              <br />
+              {formik.errors.number && formik.touched.number ? (
+                <div className="error">{formik.errors.number}</div>
               ) : null}
             </div>
 
@@ -148,7 +187,10 @@ function Contacts() {
                 <option value="Building Construction">
                   Building Construction
                 </option>
+                <option value="Demolition">Demolitions</option>
                 <option value="Road construction">Road construction</option>
+                <option value="General Contracting">General Contracting</option>
+        
               </select>
               <br />
               {formik.errors.service && formik.touched.service ? (
