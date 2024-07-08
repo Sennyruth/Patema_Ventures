@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 
 const prisma = new PrismaClient();
 
-export const createUser = async (req, res, ) => {
+export const createUser = async (req, res ) => {
   try {
     const { firstname, lastname, email, password } = req.body;
     if (!firstname)
@@ -35,7 +35,7 @@ export const createUser = async (req, res, ) => {
     // next();
     // const user = await prisma.user.findUnique({where:{email}})
 
-    const hashedPassword = await bcrypt.compareSync(password, 10);
+    const hashedPassword = await bcrypt.hashSync(password, 10);
     const newuser = await prisma.user.create({
       data: {
         firstname: firstname,
@@ -52,45 +52,35 @@ export const createUser = async (req, res, ) => {
 };
 
 export const loginUser = async (req, res) => {
-  const { firstname,lastname,email, password } = req.body;
+  const {email, password } = req.body;
   try {
-    const loginUser = await prisma.user.findFirst({
+    const newUser = await prisma.user.findFirst({
       where: { email:email }
     })
-    if (loginUser) {
-      const passwordMatch = bcrypt.compareSync(password, loginUser.password);
+    if (newUser) {
+      const passwordMatch = bcrypt.compareSync(password, newUser.password);
 
       if (passwordMatch === true) {
         const payload ={
-          id: loginUser.id,
-          firstname: loginUser.firstname,
-          lastname: loginUser.lastname,
-          email: loginUser.email,
+          id: newUser.id,
+          firstname: newUser.firstname,
+          lastname: newUser.lastname,
+          email: newUser.email,
 
         }
         const token = jwt.sign( payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
           });
           res.cookie("access-token",token)
-          res.status(200).json({ success: true, data: payload });
+          res.status(200).json({ success: true, data: newUser });
          
-
-
-        // const token = jwt.sign(user,
-        //   process.env.JWT_SECRET,
-        //   { expiresIn: "10m" }
-        //   )
-          
-
-        //   res.status(200).json({ success: true, data: user });
-
-        // res.send("logged in successfully");
-
       } else {
         res
           .status(400)
           .json({ message: false, message: "user not found" });
       }
+    } else {
+      res.status(400).json({ message: false, message: "user not found" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

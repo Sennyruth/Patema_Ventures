@@ -10,6 +10,7 @@ import { apiUrl } from "../../../utils/config.js";
 function Signup() {
   // console.log(apiUrl);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const validationschema = Yup.object({
     firstname: Yup.string()
@@ -50,6 +51,7 @@ function Signup() {
       confirmpassword: "",
     },
     onSubmit: async (formValues) => {
+      setLoading(true);
       try {
         const response = await fetch(`${apiUrl}/api/user/register`, {
           method: "POST",
@@ -65,11 +67,14 @@ function Signup() {
         if (data.success === true) {
           setError(false);
           navigate("/sign in");
+          alert("Registered successfully");
         } else {
           setError(data.message);
         }
+        setLoading(false);
       } catch (error) {
         setError(error.message);
+        setLoading(false);
       }
     },
 
@@ -169,7 +174,7 @@ function Signup() {
                 <div className="error">{formik.errors.confirmpassword}</div>
               )}
           </div>
-
+          {loading && <p style={{ color: "white" }}>Loading...</p>}
           <button type="submit" className="form-btn">
             Register
           </button>
