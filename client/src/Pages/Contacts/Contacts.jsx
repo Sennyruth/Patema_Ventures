@@ -11,7 +11,7 @@ function Contacts() {
   const [error, setError] = useState(false);
 
   const validationschema = Yup.object({
-    serviceDate: Yup.date().required("Date is required"),
+date: Yup.date().required("Date is required"),
 
     location: Yup.string()
       .required("location is required")
@@ -24,12 +24,13 @@ function Contacts() {
   });
   const formik = useFormik({
     initialValues: {
-      serviceDate: "",
+      date: "",
       location: "",
       number: "",
       service: "",
     },
     onSubmit: async (formState) => {
+      console.log(formState);
       try {
         setError(false);
         const response = await fetch(`${apiUrl}/api/user/booking`, {
@@ -38,9 +39,11 @@ function Contacts() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formState),
+          credentials:'include'
         });
         const data = await response.json();
         console.log(data);
+        alert("booked successfully")
       } catch (error) {
         setError(error.message);
       }
@@ -117,20 +120,20 @@ function Contacts() {
           <form onSubmit={formik.handleSubmit}>
             <p className="eror">{error && error}</p>
             <div className="firstname">
-              <label htmlFor="serviceDate">Date of Service</label>
+              <label htmlFor="date">Date of Service</label>
               <br />
               <input
                 type="date"
-                id="serviceDate"
-                name="serviceDate"
+                id="date"
+                name="date"
                 placeholder="Date of Service"
-                value={formik.values.serviceDate}
+                value={formik.valuesdate}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <br />
-              {formik.errors.serviceDate && formik.touched.serviceDate ? (
-                <div className="error">{formik.errors.serviceDate}</div>
+              {formik.errorsdate && formik.toucheddate ? (
+                <div className="error">{formik.errorsdate}</div>
               ) : null}
             </div>
             <div className="location">
@@ -190,7 +193,6 @@ function Contacts() {
                 <option value="Demolition">Demolitions</option>
                 <option value="Road construction">Road construction</option>
                 <option value="General Contracting">General Contracting</option>
-        
               </select>
               <br />
               {formik.errors.service && formik.touched.service ? (

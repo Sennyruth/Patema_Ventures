@@ -6,6 +6,7 @@ import Projects from "./Pages/Projects/Projects";
 import Contacts from "./Pages/Contacts/Contacts";
 import Signup from "./Pages/Sign/Signup/Signup";
 import Signin from "./Pages/Sign/Signin/Signin";
+import Bookings from "./Pages/Bookings/Bookings";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
       <Route path="/contacts" element={<Contacts/>}/>
       <Route path="/sign up" element={<Signup/>}/>
       <Route path="/sign in" element={<Signin/>}/>
+      <Route path="/bookings" element={<Bookings/>}/>
      
       </Routes>
     

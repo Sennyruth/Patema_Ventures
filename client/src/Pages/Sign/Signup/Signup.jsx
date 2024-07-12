@@ -4,11 +4,8 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { apiUrl } from "../../../utils/config.js";
-// import axios from "axios";
 
-// const apiUrl = import.meta.env.VITE_API_URL_BASE;
 function Signup() {
-  // console.log(apiUrl);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
